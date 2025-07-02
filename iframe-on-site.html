@@ -1,0 +1,82 @@
+<style>
+.hbgzhP {
+    display: none !important;
+}
+</style>
+<script>
+window.addEventListener('message', function(event) {
+    if (event.data === 'hideElement') {
+        var elementToHide = document.getElementById('hbgzhP');
+        if (elementToHide) {
+            elementToHide.style.display = 'none';
+        }
+    }
+});
+</script>
+
+
+<iframe  id="scheduleIframe" style="border: none; margin: 0px; width: 100%; display: block; height: calc(120vh - 100px);"></iframe>
+
+<!--This is how links to this page need to be formatted
+//<a href="https://west.supplysideshow.com/en/expo/schedule.html?page=/part1">Part 1 of the Schedule</a> -->
+
+<script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Get the 'page' parameter from the URL
+        var page = getUrlParameter('page');
+        console.log('Page parameter:', page);
+
+        // Base URL of the schedule
+        var iframeSrc = 'https://attendees.supplysideshow.com/widget/event/supplyside-global-2025';
+
+        // Default suffix if 'page' parameter is not present
+        var defaultSuffix = '/plannings/RXZlbnRWaWV3XzEwNjk0MjY=';
+
+        // Set the iframe src based on the 'page' parameter or use default suffix
+        if (page) {
+            iframeSrc += page;
+        } else {
+            iframeSrc += defaultSuffix;
+        }
+
+        document.getElementById('scheduleIframe').src = iframeSrc;
+    </script>
+
+
+
+  <script>
+    document.getElementById('scheduleIframe').onload = function() {
+        var iframe = document.getElementById('scheduleIframe');
+        
+        // Check if iframe is from the same origin
+        try {
+            var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            var elementToHide = iframeDoc.getElementById('hbgzhP');
+            if (elementToHide) {
+                elementToHide.style.display = 'none';
+            }
+        } catch (e) {
+            // Different origin, use postMessage
+            iframe.contentWindow.postMessage('hideElement', '*');
+        }
+    };
+
+    // Listener for postMessage in case of cross-origin iframe
+    window.addEventListener('message', function(event) {
+        if (event.origin === "https://example.com") { // replace with the actual origin of the iframe content
+            if (event.data === 'hideElement') {
+                var elementToHide = document.getElementById('hbgzhP');
+                if (elementToHide) {
+                    elementToHide.style.display = 'none';
+                }
+            }
+        }
+    });
+    </script>

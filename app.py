@@ -8,10 +8,10 @@ HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Supply Side Connect New Jersey Schedule URL Creator</title>
+    <title>Supply Side Global Schedule URL Creator</title>
 </head>
 <body>
-    <h1>Supply Side Connect New Jersey Schedule URL Creator</h1>
+    <h1>Supply Side Global Schedule URL Creator</h1>
     <p>Copy the Swapcard URL that you want to link to. If you have filters or searches, make sure you copy the entire URL. Paste that URL below:</p>
     <form method="POST">
         <label for="swapcard_url">Swapcard URL:</label><br>
@@ -40,7 +40,7 @@ def index():
             remaining_url = "/planning" + split_url[1]
             # Encode the remaining URL to escape special characters
             encoded_remaining_url = quote(remaining_url)
-            new_url = f"https://newjersey.supplysideconnect.com/en/expo/event-information/schedule.html?page={encoded_remaining_url}"
+            new_url = f"https://www.supplysideglobal.com/en/expo/event-information/schedule.html?page={encoded_remaining_url}"
     return render_template_string(HTML_TEMPLATE, new_url=new_url)
 
 if __name__ == "__main__":
