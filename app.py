@@ -7,10 +7,10 @@ HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Supply Side Global Schedule URL Creator</title>
+    <title>SupplySide Global Schedule URL Creator</title>
 </head>
 <body>
-    <h1>Supply Side Global Schedule URL Creator</h1>
+    <h1>SupplySide Global Schedule URL Creator</h1>
     <p>Copy the Swapcard URL that you want to link to. If you have filters or searches, make sure you copy the entire URL. Paste that URL below:</p>
     <form method="POST">
         <label for="swapcard_url">Swapcard URL:</label><br>
