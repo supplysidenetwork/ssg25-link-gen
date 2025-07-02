@@ -1,5 +1,4 @@
 from flask import Flask, request, render_template_string
-from urllib.parse import quote
 
 app = Flask(__name__)
 
@@ -38,9 +37,8 @@ def index():
         if "/planning" in old_url or "/plannings" in old_url:
             split_url = old_url.split("/planning", 1)
             remaining_url = "/planning" + split_url[1]
-            # Encode the remaining URL to escape special characters
-            encoded_remaining_url = quote(remaining_url)
-            new_url = f"https://www.supplysideglobal.com/en/expo/event-information/schedule.html?page={encoded_remaining_url}"
+            # Don't encode the URL - let the browser handle it naturally
+            new_url = f"https://www.supplysideglobal.com/en/expo/event-information/schedule.html?page={remaining_url}"
     return render_template_string(HTML_TEMPLATE, new_url=new_url)
 
 if __name__ == "__main__":
